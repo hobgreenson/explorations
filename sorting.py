@@ -75,12 +75,11 @@ def test_sort_algo(sort_func):
     assert sort_func([1,2,3]) == [1,2,3]
     assert sort_func([6,1,2,4,10]) == [1,2,4,6,10]
     assert sort_func([1,2,2]) == [1,2,2]
-    #assert sort_func([6,1,2,4,10], ascend=False) == [10,6,4,2,1]
-    #assert sort_func([2,-1], ascend=False) == [2,-1]
+    assert sort_func([6,1,2,4,10], reverse=True) == [10,6,4,2,1]
+    assert sort_func([2,-1], reverse=True) == [2,-1]
 
 
 def time_sort_algo(sort_func):
-    #sizes = [10,200,500,1000,2000,5000,8000,10000]
     sizes = list(range(0,50))
     inputs = []
     times = []
