@@ -22,8 +22,10 @@ def insertion_sort(x, reverse=False):
         x[j+1] = elem
     return x
 
-
+    
 def merge_asc(left, right):
+    """ Helper function for merge_sort.
+    """
     n = len(left) + len(right)
     merged = [None] * n
     i = j = 0
@@ -38,6 +40,8 @@ def merge_asc(left, right):
 
 
 def merge_desc(left, right):
+    """ Helper function for merge_sort.
+    """
     n = len(left) + len(right)
     merged = [None] * n
     i = j = 0
@@ -91,22 +95,30 @@ def time_sort_algo(sort_func):
         times.append(time.time() - t)
     return sizes, times
 
-        
+
+def test(algorithms):
+    for algo in algorithms:
+        test_sort_algo(algo)
+
+
+def profile(algorithms):
+    n = len(algorithms)
+    colors = [[0,0,i/n] for i in range(1,n+1)]
+    fig, ax = plt.subplots(1,1)
+    for algo, color in zip(algorithms, colors):
+        sizes, times = time_sort_algo(algo)
+        ax.plot(sizes, times, color=color)
+    ax.set_xlabel('List size')
+    ax.set_ylabel('Execution time')
+    plt.show()
+
+
 if __name__ == '__main__':
     algorithms = [
         sorted,
         merge_sort,
         insertion_sort,
     ]
-    for algo in algorithms:
-        test_sort_algo(algo)
-    
-    colors = ['-ok', '-ob', '-or']
-    fig, ax = plt.subplots(1,1)
-    for algo, color in zip(algorithms, colors):
-        sizes, times = time_sort_algo(algo)
-        ax.plot(sizes, times, color)
-    ax.set_xlabel('List size')
-    ax.set_ylabel('Execution time')
-    plt.show()
+    test(algorithms) 
+    profile(algorithms)
 
