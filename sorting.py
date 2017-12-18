@@ -22,7 +22,17 @@ def insertion_sort(x, reverse=False):
         x[j+1] = elem
     return x
 
-    
+
+def bubble_sort(x, reverse=False):
+    for i in range(len(x)):
+        for j in range(i+1, len(x)):
+            if x[j] < x[j-1] and not reverse:
+                x[j-1], x[j] = x[j], x[j-1]
+            elif x[j] > x[j-1] and reverse:
+                x[j-1], x[j] = x[j], x[j-1]
+    return x
+
+
 def merge_asc(left, right):
     """ Helper function for merge_sort.
     """
@@ -118,7 +128,9 @@ if __name__ == '__main__':
         sorted,
         merge_sort,
         insertion_sort,
+        bubble_sort,
     ]
-    test(algorithms) 
-    profile(algorithms)
-
+    #test(algorithms) 
+    #profile(algorithms)
+    print(bubble_sort([3,2,1]))
+    
