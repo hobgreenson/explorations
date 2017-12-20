@@ -9,10 +9,9 @@ class Node:
         self.right = None
 
 
-class RBTree:
-    """ A red-black tree implementation. This is a self-balancing
-    binary search tree. There are no duplicate keys, and keys are
-    assumed to be comparable using <, > or == .
+class BinarySearchTree:
+    """ This is a basic binary search tree (NOT self-balancing).
+    More advanced trees might use this as a base class.
     """
     def __init__(self):
         self.root = None
@@ -22,8 +21,6 @@ class RBTree:
         return self.size
 
     def __contains__(self, key):
-        if self.root is None:
-            return False
         node = self.root
         while node is not None:
             if key == node.key:
@@ -39,8 +36,6 @@ class RBTree:
         with matching key, otherwise raise KeyError if
         no key matches.
         """
-        if self.root is None:
-            raise KeyError
         node = self.root
         while node is not None:
             if key == node.key:
@@ -84,7 +79,7 @@ class RBTree:
         while curr is not None:
             if key == curr.key:
                 if curr.left is None and curr.right is None:
-                    
+                   pass 
             elif key < curr.key:
                 prev = curr
                 curr = curr.left
@@ -94,8 +89,8 @@ class RBTree:
         raise KeyError
 
 
-def test_rbtree():
-    tree = RBTree()
+def test_trees():
+    tree = BinarySearchTree()
     assert len(tree) == 0
     tree['a'] = 1
     assert len(tree) == 1
@@ -110,7 +105,5 @@ def test_rbtree():
 
 
 if __name__ == '__main__':
-    test_rbtree()
-
-
+    test_trees()
 
