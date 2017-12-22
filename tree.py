@@ -1,3 +1,4 @@
+import time
 
 class Node:
     """ Tree node.
@@ -7,7 +8,9 @@ class Node:
         self.data = data
         self.left = None
         self.right = None
-
+    
+    def __repr__(self):
+        return str(self.key)
 
 class BinarySearchTree:
     """ This is a basic binary search tree (NOT self-balancing).
@@ -79,7 +82,8 @@ class BinarySearchTree:
         while curr is not None:
             if key == curr.key:
                 if curr.left is None and curr.right is None:
-                   pass 
+                    # no children but has parent
+                    pass
             elif key < curr.key:
                 prev = curr
                 curr = curr.left
@@ -88,22 +92,46 @@ class BinarySearchTree:
                 curr = curr.right
         raise KeyError
 
+    def keys(self):
+        """ Returns a list of node keys in ascending 
+        sorted order.
+        """
+        keys = []
+        if self.root is None: return keys
+        visited = [self.root]
+        node = self.root.left
+        while len(visited) > 0:
+            if node is not None:
+                visited.append(node)
+                node = node.left
+            else:
+                parent = visited.pop()
+                keys.append(parent.key)
+                if parent.right is not None:
+                    visited.append(parent.right)
+                    node = parent.right.left
+        return keys 
 
-def test_trees():
+def test_binary_search_tree():
     tree = BinarySearchTree()
     assert len(tree) == 0
-    tree['a'] = 1
+    tree['g'] = 1
     assert len(tree) == 1
-    assert 'a' in tree
-    assert tree['a'] == 1
-    tree['b'] = 2
+    assert 'g' in tree
+    assert tree['g'] == 1
+    tree['c'] = 2
     assert len(tree) == 2
-    assert 'b' in tree
-    assert tree['b'] == 2
-    assert tree.root.right.key == 'b'
-    assert tree.root.right.data == 2
+    assert 'c' in tree
+    assert tree['c'] == 2
+    tree['j'] = 3
+    assert len(tree) == 3
+    assert 'j' in tree
+    assert tree['j'] == 3
+    assert tree.root.key == 'g'
+    assert tree.root.left.key == 'c'
+    assert tree.root.right.key == 'j'
+    assert tree.keys() == ['c', 'g', 'j']
 
 
 if __name__ == '__main__':
-    test_trees()
-
+    test_binary_search_tree()
