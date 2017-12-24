@@ -6,11 +6,13 @@ class Node:
     def __init__(self, key, data):
         self.key = key
         self.data = data
+        self.parent = None
         self.left = None
         self.right = None
     
     def __repr__(self):
         return str(self.key)
+
 
 class BinarySearchTree:
     """ This is a basic binary search tree (NOT self-balancing).
@@ -77,24 +79,36 @@ class BinarySearchTree:
         self.size += 1
 
     def __delitem__(self, key):
+        """ Deletes a node from the tree. If the left
+        subtree is not empty, then the node is replaced
+        with the node with the largest key in the left
+        subtree. If the left subtree is empty, and the right
+        subtree is not empty, then the node is replaced with
+        the smallest node in the right subtree. If both left
+        and right subtrees are empty, then the node is not
+        replaced with anything.
+        """
         prev = None
         curr = self.root
         while curr is not None:
             if key == curr.key:
-                if curr.left is None and curr.right is None:
-                    # no children but has parent
-                    pass
+                break     
             elif key < curr.key:
                 prev = curr
                 curr = curr.left
             else:
                 prev = curr
                 curr = curr.right
+        
         raise KeyError
 
     def keys(self):
         """ Returns a list of node keys in ascending 
-        sorted order.
+        sorted order. A stack called 'visited' is maintained,
+        which keeps track of the history of visted nodes. A
+        pointer to a node is advanced left, and visted nodes
+        are pushed onto the stack, until the node points to None,
+        indicating that the last-visted 
         """
         keys = []
         if self.root is None: return keys
@@ -135,3 +149,4 @@ def test_binary_search_tree():
 
 if __name__ == '__main__':
     test_binary_search_tree()
+
