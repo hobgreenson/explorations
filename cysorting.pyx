@@ -69,8 +69,8 @@ def merge_sort(x, reverse=False):
     or descending order using the insertion sort algorithm.
         Based on CLRS exercise 2.3-2
     """
-    if len(x) <= 1:
-        return x
+    if len(x) <= 75:
+        return insertion_sort(x)
     if reverse:
         merge = merge_desc
     else:
