@@ -70,7 +70,7 @@ def merge_sort(x, reverse=False):
         Based on CLRS exercise 2.3-2
     """
     if len(x) <= 75:
-        return insertion_sort(x)
+        return insertion_sort(x, reverse=reverse)
     if reverse:
         merge = merge_desc
     else:
