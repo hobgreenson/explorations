@@ -1,4 +1,4 @@
-from cython cimport boundscheck, wraparound
+
 
 def insertion_sort(list x, reverse=False):
     """ Sorts the input array x in either ascending (default)
@@ -64,18 +64,19 @@ def merge_desc(list left, list right):
     return merged
 
 
-def merge_sort(x, reverse=False):
+def merge_sort(list x, reverse=False):
     """ Sorts the input array x in either ascending (default)
     or descending order using the insertion sort algorithm.
         Based on CLRS exercise 2.3-2
     """
-    if len(x) <= 75:
+    cdef long n = len(x)
+    if n <= 75:
         return insertion_sort(x, reverse=reverse)
     if reverse:
         merge = merge_desc
     else:
         merge = merge_asc
-    mid = len(x) // 2
+    mid = n // 2
     left = merge_sort(x[:mid], reverse=reverse)
     right = merge_sort(x[mid:], reverse=reverse)
     return merge(left, right)
