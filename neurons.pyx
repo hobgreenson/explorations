@@ -20,7 +20,7 @@ cdef class Neuron:
         self.c = c
         self.d = d
 
-    def evolve(self, double dt):
+    cpdef void evolve(self, double dt):
         """ Updates state variables u and v, using Euler method.
         """
         cdef: 
