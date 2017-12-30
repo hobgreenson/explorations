@@ -5,10 +5,7 @@ def insertion_sort(list x, reverse=False):
     or descending order using the insertion sort algorithm.
         Based on CLRS chapter 2.1
     """
-    cdef:
-        long i
-        long j
-        long n = len(x)
+    cdef long i, j, n = len(x)
     for i in range(n):
         elem = x[i]
         j = i - 1
@@ -31,8 +28,7 @@ def merge_asc(list left, list right):
         long sl = len(left)
         long sr = len(right)
         long n = sl + sr
-        long i = 0
-        long j = 0
+        long k, i = 0, j = 0
         list merged = [None] * n
     for k in range(n):
         if i < sl and (j >= sr or left[i] < right[j]):
@@ -51,8 +47,7 @@ def merge_desc(list left, list right):
         long sl = len(left)
         long sr = len(right)
         long n = sl + sr
-        long i = 0
-        long j = 0
+        long k, i = 0, j = 0
         list merged = [None] * n
     for k in range(n):
         if i < sl and (j >= sr or left[i] > right[j]):

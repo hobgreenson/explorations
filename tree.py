@@ -1,5 +1,11 @@
 import time
 
+class Heap:
+    def __init__(self, data, minheap=True):
+        self.data = data
+        self.minheap = minheap 
+
+
 class Node:
     """ Tree node.
     """
